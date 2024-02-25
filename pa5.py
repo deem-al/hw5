@@ -71,7 +71,8 @@ class DTree:
             return max(self.variable + 1, self.greater.tuple_atleast())
 
     def find_outcome(self, tup):
-        '''Takes in a tuple with observations and navigates through the tree to provide the outcome that matches (like "walk")'''
+        '''Takes in a tuple with observations and navigates through 
+        the tree to provide the outcome that matches'''
         if self.variable is None:
             return self.outcome
         else:
@@ -80,12 +81,12 @@ class DTree:
 
     def no_repeats(self):
         '''Analyzes the tree and returns True if and only if there are no “repeats”, False otherwise.'''
-        def helper(tree, seen_variables):
-            if tree is None:
-                return True
-            if tree.variable in seen_variables:
+        def helper(self, variable_set):
+            if self.variable in variable_set:
                 return False
-            seen_variables.add(tree.variable)
-            return helper(tree.lessequal, seen_variables.copy()) and helper(tree.greater, seen_variables.copy())
+            if self.lessequal is None and self.greater is None:
+                return True
+            variable_set.add(self.variable)
+            return (self.lessequal.helper(set(variable_set)) and self.greater.helper(set(variable_set)))
 
         return helper(self, set())
