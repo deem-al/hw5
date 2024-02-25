@@ -44,6 +44,7 @@ def treemap(f, tree):
         treemap(f, child)
 
 #Problem 4: Trees Modeling Decisions
+
 #Problem 4: Trees Modeling Decisions
 
 class DTree:
@@ -72,13 +73,16 @@ class DTree:
         return helper(self)
 
     def find_outcome(self, observations):
-        if self.variable is not None:
-            if observations[self.variable] <= self.threshold:
-                return self.lessequal.find_outcome(observations)
-            else:
-                return self.greater.find_outcome(observations)
+    if self.variable is not None:
+        observation_value = observations[self.variable]
+        threshold_value = self.threshold
+        
+        if observation_value < threshold_value or observation_value == threshold_value:
+            return self.lessequal.find_outcome(observations)
         else:
-            return self.outcome
+            return self.greater.find_outcome(observations)
+    else:
+        return self.outcome
 
     def no_repeats(self):
         def helper(tree, seen_variables):
@@ -90,4 +94,3 @@ class DTree:
             return helper(tree.lessequal, seen_variables.copy()) and helper(tree.greater, seen_variables.copy())
 
         return helper(self, set())
-
