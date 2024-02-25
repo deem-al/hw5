@@ -72,12 +72,11 @@ class DTree:
 
     def find_outcome(self, tup):
         '''Takes in a tuple with observations and navigates through the tree to provide the outcome that matches (like "walk")'''
-        if self.lessequal is None and self.greater is None:
+        if self.variable is None:
             return self.outcome
-        elif tup[self.variable] > self.threshold:
-            return self.greater.find_outcome(tup)
         else:
-            return self.lessequal.find_outcome(tup)
+            next_node = self.greater if tup[self.variable] > self.threshold else self.lessequal
+            return next_node.find_outcome(tup)
 
     def no_repeats(self):
         '''Analyzes the tree and returns True if and only if there are no “repeats”, False otherwise.'''
