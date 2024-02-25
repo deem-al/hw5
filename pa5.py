@@ -44,7 +44,6 @@ def treemap(f, tree):
         treemap(f, child)
 
 #Problem 4: Trees Modeling Decisions
-
 class DTree:
     def __init__(self, variable, threshold, lessequal, greater, outcome):
         if (variable is not None and threshold is not None and 
@@ -80,7 +79,7 @@ class DTree:
             return next_node.find_outcome(tup)
 
     def no_repeats(self):
-    '''Analyzes the tree and returns True if and only if there are no “repeats”, False otherwise.'''
+        '''Analyzes the tree and returns True if and only if there are no “repeats”, False otherwise.'''
         def helper(node, variable_set):
             if node.variable in variable_set:
                 return False
