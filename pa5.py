@@ -27,15 +27,18 @@ def dict_filter(f, d):
 
 
 #Problem 3: Tree Map
-def treemap(func, tree):
+
+def treemap(f, tree):
+    '''modifies the tree according to the function'''
+    
     if tree is None:
-        return None
-    key, value = tree
-    new_key, new_value = func(key, value)
+        return
+    
+    key, value, left, right = tree
+    
+    new_key, new_value = f(key, value)
     tree[0] = new_key
     tree[1] = new_value
-    left = tree[2]
-    right = tree[3]
-    treemap(func, left)
-    treemap(func, right)
-    return tree
+    
+    treemap(f, left)
+    treemap(f, right)
