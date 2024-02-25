@@ -20,10 +20,10 @@ def dict_filter(f, d):
     filtered_d = {}
     
     for key, value in d.items():
-    
-        if f(key,value):
+        if f(key, value):
             filtered_d[key] = value
-        return filtered_d
+    
+    return filtered_d
 
 def checker(name, abbrev):
     return abbrev[0] == "I" and name[1] == "l"
