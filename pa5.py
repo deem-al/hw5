@@ -1,13 +1,21 @@
 #Problem 1: Bisection Method
 
 def bisection_root(function, LB, UB):
-    '''Uses bisection root method to find a root of a function'''    
+    '''Uses bisection root method to find a root of a function'''
+    
     if function(LB) * function(UB) > 0:
-        raise ValueError ("can't find two roots on same side of xaxis")        
-    if abs(function(LB)) < 1e-6:
-        return LB
-    if abs(function(UB)) < 1e-6:
-        return UB
+        raise ValueError("we cannot expect to find a root between two points on the same side of the x-axis")
+        
+    while abs(UB - LB) > 1e-6:
+        midpoint = (LB + UB) / 2
+        if abs(function(midpoint)) < 1e-6:
+            return midpoint
+        elif function(LB) * function(midpoint) < 0:
+            UB = midpoint
+        else:
+            LB = midpoint
+            
+    return (LB + UB) / 2
 
 #Problem 2: Dictionary Filter
 
