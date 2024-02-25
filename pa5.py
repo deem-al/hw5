@@ -60,13 +60,15 @@ class DTree:
             raise ValueError("Invalid input parameters")
 
     def tuple_atleast(self):
-        if self is None:
-            return 0
-        
-        if self.variable is not None:
-            return max(self.variable + 1, self.lessequal.tuple_atleast(), self.greater.tuple_atleast())
-        else:
-            return max(self.lessequal.tuple_atleast(), self.greater.tuple_atleast())
+        """Analyzes the tree and determines how many entries there need to be in the tuple."""
+        if self.lessequal is None and self.greater is None:
+            if self.variable is None:
+                return 0
+            return self.variable + 1 
+        elif self.lessequal:
+            return max(self.variable + 1, self.lessequal.tuple_atleast()) 
+        elif self.greater:
+            return max(self.variable + 1, self.greater.tuple_atleast())
 
     def find_outcome(self, observations):
         if self.variable is not None:
