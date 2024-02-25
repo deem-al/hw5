@@ -56,9 +56,10 @@ class DTree:
         self.greater = greater
         self.outcome = outcome
         
-        if (variable is not None and threshold is not None and 
-            lessequal is not None and greater is not None) and outcome is not None:
+        if (variable is None and threshold is None and lessequal is None and greater is None and outcome is not None) or \
+   (variable is not None and threshold is not None and lessequal is not None and greater is not None and outcome is None):
             raise ValueError("Invalid input parameters: Either all four of the first four arguments should be None, or the last argument (outcome) should be None, but not both")
+
 
     def tuple_atleast(self):
         def helper(tree):
