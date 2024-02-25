@@ -28,17 +28,24 @@ def dict_filter(f, d):
 
 #Problem 3: Tree Map
 
+class KVTree:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        self.children = []
+
+    def add_child(self, child):
+        self.children.append(child)
+
 def treemap(f, tree):
     '''modifies the tree according to the function'''
-    
     if tree is None:
         return
     
-    key, value, left, right = tree
+    # Apply the function to the current node
+    tree.key, tree.value = f(tree.key, tree.value)
     
-    new_key, new_value = f(key, value)
-    tree[0] = new_key
-    tree[1] = new_value
-    
-    treemap(f, left)
-    treemap(f, right)
+    # Recursively apply the function to each child
+    for child in tree.children:
+        treemap(f, child)
+
