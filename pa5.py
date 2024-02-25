@@ -1,11 +1,16 @@
-def bisection_root(function, LB, UB):
-    '''Uses bisection root method to find a root of a function'''
-    
-    if function(LB) * function(UB) > 0:
-        raise ValueError ("we cannot expect to find a root between two points on the same side of the xaxis")
-        
-    if abs(function(LB)) < 1e-6:
-        return LB
-    if abs(function(UB)) < 1e-6:
-        return UB
+>>> def samesign(a, b):
+        return a * b > 0
 
+>>> def bisect(func, low, high):
+    'Find root of continuous function where f(low) and f(high) have opposite signs'
+
+    assert not samesign(func(low), func(high))
+
+    for i in range(54):
+        midpoint = (low + high) / 2.0
+        if samesign(func(low), func(midpoint)):
+            low = midpoint
+        else:
+            high = midpoint
+
+    return midpoint
