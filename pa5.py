@@ -24,9 +24,3 @@ def dict_filter(f, d):
             filtered_d[key] = value
     
     return filtered_d
-
-def checker(name, abbrev):
-    return abbrev[0] == "I" and name[1] == "l"
-example = {"Illinois": "IL", "Pennsylvania": "PA", "Indiana": "IN"}
-
-dict_filter(checker, example)
