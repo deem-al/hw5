@@ -80,13 +80,13 @@ class DTree:
             return next_node.find_outcome(tup)
 
     def no_repeats(self):
-        '''Analyzes the tree and returns True if and only if there are no “repeats”, False otherwise.'''
-        def helper(self, variable_set):
-            if self.variable in variable_set:
+    '''Analyzes the tree and returns True if and only if there are no “repeats”, False otherwise.'''
+        def helper(node, variable_set):
+            if node.variable in variable_set:
                 return False
-            if self.lessequal is None and self.greater is None:
+            if node.lessequal is None and node.greater is None:
                 return True
-            variable_set.add(self.variable)
-            return (self.lessequal.helper(set(variable_set)) and self.greater.helper(set(variable_set)))
+            variable_set.add(node.variable)
+            return helper(node.lessequal, set(variable_set)) and helper(node.greater, set(variable_set))
 
         return helper(self, set())
