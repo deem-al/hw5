@@ -1,3 +1,4 @@
+#DONE
 #Problem 1: Bisection Method
 
 def bisection_root(function, LB, UB):
@@ -17,6 +18,7 @@ def bisection_root(function, LB, UB):
             
     return (LB + UB) / 2
 
+#DONE
 #Problem 2: Dictionary Filter
 
 def dict_filter(f, d):
@@ -31,6 +33,7 @@ def dict_filter(f, d):
     return filtered_d
 
 
+#DONE
 #Problem 3: Tree Map
 
 class KVTree:
