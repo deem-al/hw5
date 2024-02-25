@@ -24,3 +24,14 @@ def dict_filter(f, d):
             filtered_d[key] = value
     
     return filtered_d
+
+
+#Problem 3: Tree Map
+
+def treemap(f, tree):
+    '''modifies the tree according to the function'''
+    
+    tree.key, tree.value = f(tree.key, tree.value)
+    
+    for child in tree.childern:
+        treemap(f, child)
