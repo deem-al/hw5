@@ -60,7 +60,7 @@ class DTree:
             raise ValueError("Invalid input parameters")
 
     def tuple_atleast(self):
-        """Analyzes the tree and determines how many entries there need to be in the tuple."""
+        """Analyzes tree to determine how many entries there need to be in the tuple."""
         if self.lessequal is None and self.greater is None:
             if self.variable is None:
                 return 0
@@ -70,19 +70,17 @@ class DTree:
         elif self.greater:
             return max(self.variable + 1, self.greater.tuple_atleast())
 
-    def find_outcome(self, observations):
-        if self.variable is not None:
-            observation_value = observations[self.variable]
-            threshold_value = self.threshold
-
-            if observation_value < threshold_value or observation_value == threshold_value:
-                return self.lessequal.find_outcome(observations)
-            else:
-                return self.greater.find_outcome(observations)
-        else:
+    def find_outcome(self, tup):
+        '''Takes in a tuple with observations and navigates through the tree to provide the outcome that matches (like "walk")'''
+        if self.lessequal is None and self.greater is None:
             return self.outcome
+        elif tup[self.variable] > self.threshold:
+            return self.greater.find_outcome(tup)
+        else:
+            return self.lessequal.find_outcome(tup)
 
     def no_repeats(self):
+        '''Analyzes the tree and returns True if and only if there are no “repeats”, False otherwise.'''
         def helper(tree, seen_variables):
             if tree is None:
                 return True
