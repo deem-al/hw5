@@ -1,7 +1,7 @@
->>> def samesign(a, b):
-        return a * b > 0
+def samesign(a, b):
+    return a * b > 0
 
->>> def bisect(func, low, high):
+def bisect(func, low, high):
     'Find root of continuous function where f(low) and f(high) have opposite signs'
 
     assert not samesign(func(low), func(high))
