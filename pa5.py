@@ -42,10 +42,8 @@ def treemap(f, tree):
     if tree is None:
         return
     
-    # Apply the function to the current node
     tree.key, tree.value = f(tree.key, tree.value)
     
-    # Recursively apply the function to each child
     for child in tree.children:
         treemap(f, child)
 
