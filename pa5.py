@@ -47,20 +47,15 @@ def treemap(f, tree):
 
 class DTree:
     def __init__(self, variable, threshold, lessequal, greater, outcome):
-        self.variable = variable
-        self.threshold = threshold
-        self.lessequal = lessequal
-        self.greater = greater
-        self.outcome = outcome
-        
-        if ((variable is not None and threshold is not None and
-             lessequal is not None and greater is not None) and
-            (outcome is None)) or ((variable is None and
-                                    threshold is None and
-                                    lessequal is None and
-                                    greater is None) and
-                                    (outcome is not None)):
-            pass
+        if (variable is not None and threshold is not None and 
+            lessequal is not None and greater is not None and outcome is None) or \
+           (variable is None and threshold is None and 
+            lessequal is None and greater is None and outcome is not None):
+            self.variable = variable
+            self.threshold = threshold
+            self.lessequal = lessequal
+            self.greater = greater
+            self.outcome = outcome
         else:
             raise ValueError("Invalid input parameters")
 
