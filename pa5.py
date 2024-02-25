@@ -44,30 +44,32 @@ def treemap(f, tree):
         treemap(f, child)
 
 #Problem 4: Trees Modeling Decisions
+
 class DTree:
     def __init__(self, variable, threshold, lessequal, greater, outcome):
-        if (variable is not None and threshold is not None and 
-            lessequal is not None and greater is not None and outcome is None) or \
-           (variable is None and threshold is None and 
-            lessequal is None and greater is None and outcome is not None):
-            self.variable = variable
-            self.threshold = threshold
-            self.lessequal = lessequal
-            self.greater = greater
-            self.outcome = outcome
-        else:
+        self.variable = variable
+        self.threshold = threshold
+        self.lessequal = lessequal
+        self.greater = greater
+        self.outcome = outcome
+        
+        if ((variable is not None and threshold is not None and
+             lessequal is not None and greater is not None) and
+            (outcome is None)) or ((variable is None and
+                                    threshold is None and
+                                    lessequal is None and
+                                    greater is None) and
+                                    (outcome is not None)):
             raise ValueError("Invalid input parameters")
 
     def tuple_atleast(self):
-        def helper(tree):
-            if tree is None:
-                return 0
-            if tree.variable is not None:
-                return max(tree.variable + 1, helper(tree.lessequal), helper(tree.greater))
-            else:
-                return max(helper(tree.lessequal), helper(tree.greater))
-
-        return helper(self)
+        if self is None:
+            return 0
+        
+        if self.variable is not None:
+            return max(self.variable + 1, self.lessequal.tuple_atleast(), self.greater.tuple_atleast())
+        else:
+            return max(self.lessequal.tuple_atleast(), self.greater.tuple_atleast())
 
     def find_outcome(self, observations):
         if self.variable is not None:
@@ -91,5 +93,4 @@ class DTree:
             return helper(tree.lessequal, seen_variables.copy()) and helper(tree.greater, seen_variables.copy())
 
         return helper(self, set())
-
 
