@@ -60,6 +60,8 @@ class DTree:
                                     lessequal is None and
                                     greater is None) and
                                     (outcome is not None)):
+            pass
+        else:
             raise ValueError("Invalid input parameters")
 
     def tuple_atleast(self):
