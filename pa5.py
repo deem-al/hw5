@@ -1,35 +1,11 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-#Problem 1: Bisection Method
-import numpy as np
-
-def my_bisection(f, a, b, tol): 
-    # approximates a root, R, of f bounded 
-    # by a and b to within tolerance 
-    # | f(m) | < tol with m the midpoint 
-    # between a and b Recursive implementation
+def bisection_root(function, LB, UB):
+    '''Uses bisection root method to find a root of a function'''
     
-    # check if a and b bound a root
-    if np.sign(f(a)) == np.sign(f(b)):
-        raise Exception(
-         "The scalars a and b do not bound a root")
+    if function(LB) * function(UB) > 0:
+        raise ValueError ("we cannot expect to find a root between two points on the same side of the xaxis")
         
-    # get midpoint
-    m = (a + b)/2
-    
-    if np.abs(f(m)) < tol:
-        # stopping condition, report m as root
-        return m
-    elif np.sign(f(a)) == np.sign(f(m)):
-        # case where m is an improvement on a. 
-        # Make recursive call with a = m
-        return my_bisection(f, m, b, tol)
-    elif np.sign(f(b)) == np.sign(f(m)):
-        # case where m is an improvement on b. 
-        # Make recursive call with b = m
-        return my_bisection(f, a, m, tol)
+    if abs(function(LB)) < 1e-6:
+        return LB
+    if abs(function(UB)) < 1e-6:
+        return UB
 
