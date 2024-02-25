@@ -48,20 +48,17 @@ def treemap(f, tree):
         treemap(f, child)
 
 #Problem 4: Trees Modeling Decisions
-
 class DTree:
     def __init__(self, variable, threshold, lessequal, greater, outcome):
+        self.variable = variable
+        self.threshold = threshold
+        self.lessequal = lessequal
+        self.greater = greater
+        self.outcome = outcome
+        
         if (variable is not None and threshold is not None and 
-            lessequal is not None and greater is not None and outcome is None) or \
-           (variable is None and threshold is None and 
-            lessequal is None and greater is None and outcome is not None):
-            self.variable = variable
-            self.threshold = threshold
-            self.lessequal = lessequal
-            self.greater = greater
-            self.outcome = outcome
-        else:
-            raise ValueError("Invalid input parameters")
+            lessequal is not None and greater is not None) and outcome is not None:
+            raise ValueError("Invalid input parameters: Either all four of the first four arguments should be None, or the last argument (outcome) should be None, but not both")
 
     def tuple_atleast(self):
         def helper(tree):
@@ -93,3 +90,4 @@ class DTree:
             return helper(tree.lessequal, seen_variables.copy()) and helper(tree.greater, seen_variables.copy())
 
         return helper(self, set())
+
